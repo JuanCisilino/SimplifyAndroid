@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">PokeReloaded</string>
+    <string name="title_home">Lista</string>
+    <string name="title_favorite">Favoritos</string>
+    <string name="title_detail">Detalle</string>
+    <string name="pokemon">pokemon</string>
+    <string name="error_list">Error cargando la lista</string>
+    <string name="fire">fire</string>
+    <string name="water">water</string>
+    <string name="grass">grass</string>
+    <string name="electric">electric</string>
+    <string name="fairy">fairy</string>
+    <string name="steel">steel</string>
+    <string name="dragon">dragon</string>
+    <string name="fighting">fighting</string>
+    <string name="normal">normal</string>
+    <string name="poison">poison</string>
+    <string name="ghost">ghost</string>
+    <string name="dark">dark</string>
+    <string name="flying">flying</string>
+    <string name="rock">rock</string>
+    <string name="ice">ice</string>
+    <string name="bug">bug</string>
+    <string name="psychic">psychic</string>
+    <string name="ground">ground</string>
+    <string name="tipo">Tipo</string>
+    <string name="fuerte">Fuerte Contra los tipo</string>
+    <string name="debil">Debil Contra los tipo</string>
+    <string name="evoluciona_de">Evoluciona de</string>
+    <string name="evoluciona_en">Evoluciona en</string>
+    <string name="search_editText">Escribe el nombre del pokemon que buscas</string>
+</resources>

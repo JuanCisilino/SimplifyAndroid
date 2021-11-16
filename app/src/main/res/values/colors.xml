@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#DFCDB1F1</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="fuego">#ED0621</color>
+    <color name="agua">#E27673EF</color>
+    <color name="viento">#DCE4E4B1</color>
+    <color name="tierra">#D72BA509</color>
+    <color name="hada">#D7B561B8</color>
+    <color name="rest">#D7E87070</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="lightBackground">#B4BCDFF8</color>
+</resources>
