@@ -1,9 +1,9 @@
 package com.example.pokereloaded.ui.home
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokereloaded.R
@@ -32,13 +32,17 @@ class PokemonAdapter: RecyclerView.Adapter<PokemonAdapter.MyViewHolder>() {
         fun bind(pokemon: Pokemon) {
             pokemon.split()
             view.pokemonNameTextView.text = pokemon.name
-
-            Glide.with(view.pokemonImageView)
-                .load(pokemon.listimg)
-                .circleCrop()
-                .into(view.pokemonImageView)
-
+            pokemon.listimg?.let { glideImage(view.pokemonImageView, it) }
+            view.pokemonfavoriteImageView.visibility =
+                if (pokemon.favorite == true) View.VISIBLE else View.GONE
             itemView.setOnClickListener { onPokemonClickCallback?.invoke(pokemon) }
+        }
+
+        private fun glideImage(imageView: ImageView, url: String){
+            Glide.with(imageView)
+                .load(url)
+                .circleCrop()
+                .into(imageView)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.pokereloaded.ui.detail
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class DetailFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
     private lateinit var pokemon: Pokemon
+    private lateinit var mediaPlayer: MediaPlayer
     private var _binding: FragmentDetailBinding? = null
 
     private val binding get() = _binding!!
@@ -41,6 +43,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mediaPlayer = MediaPlayer.create(context, R.raw.favorite)
         setComponents()
         subscribeToLiveData()
     }
@@ -65,6 +68,7 @@ class DetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.item_pokemon, null)
         binding.evoEnPokemonLayout.removeAllViews()
         evolved.split()
+        view.pokemonNameTextView.setTextColor(resources.getColor(R.color.white))
         view.pokemonNameTextView.text = evolved.name
         Glide.with(view.pokemonImageView)
             .load(evolved.listimg)
@@ -90,6 +94,7 @@ class DetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.item_pokemon, null)
         binding.evoDePokemonLayout.removeAllViews()
         toEvolve.split()
+        view.pokemonNameTextView.setTextColor(resources.getColor(R.color.white))
         view.pokemonNameTextView.text = toEvolve.name
         Glide.with(view.pokemonImageView)
             .load(toEvolve.listimg)
@@ -108,7 +113,7 @@ class DetailFragment : Fragment() {
     private fun setComponents() {
         binding.nameTextView.text = pokemon.name
         binding.favoriteImageView.setImageResource(getFavorite())
-        binding.favoriteImageView.setOnClickListener { viewModel.favorite(pokemon.name) }
+        binding.favoriteImageView.setOnClickListener { setFavorite() }
         Glide.with(requireContext()).load(pokemon.detimg).into(binding.imagenImageView)
         setBackgroundColor()
         pokemon.tipos?.forEach { setTypesLayout(it) }
@@ -116,6 +121,11 @@ class DetailFragment : Fragment() {
         setWeakLayout()
         randomizeCaract()
         setEvolution()
+    }
+
+    private fun setFavorite(){
+        if (pokemon.favorite == false) mediaPlayer.start()
+        viewModel.favorite(pokemon.name)
     }
 
     private fun setWeakLayout() {

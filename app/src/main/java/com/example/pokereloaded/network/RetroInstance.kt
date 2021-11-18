@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetroInstance {
 
     companion object{
-        private const val baseURL = "http://192.168.1.35:8080/"
+        private const val baseURL = "https://simplify-poke-api.herokuapp.com/"
 
         fun getRetrofitInstance(): Retrofit =
             Retrofit.Builder()

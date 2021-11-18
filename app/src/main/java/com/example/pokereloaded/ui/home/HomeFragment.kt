@@ -43,6 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setEditText(){
+        this.view?.rootView?.let { this.hideKeyboard(it) }
         binding.searchEditText.setOnEditorActionListener { _, actionId, _ -> editorNameActionListener(actionId)  }
     }
 
