@@ -19,6 +19,9 @@ interface PokeRepo {
     @GET("pokemon/{name}")
     fun getPokemonById(@Path ("name") name: String): Observable<Pokemon>
 
+    @GET("pokemon/favorites")
+    fun getFavorites(): Observable<List<Pokemon>>
+
     @PATCH("pokemon/{name}")
     fun favorite(@Path ("name") name: String): Observable<Pokemon>
 }

@@ -1,6 +1,5 @@
 package com.example.pokereloaded.ui.favorites
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pokereloaded.models.Pokemon
@@ -14,11 +13,11 @@ class FavoritesViewModel : ViewModel() {
     private val instance = RetroInstance.getRetrofitInstance().create(PokeRepo::class.java)
 
     fun fetchList() {
-        instance.getList()
+        instance.getFavorites()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .subscribe(
-                {pokemonList.postValue(it.pokemonList.filter { it.favorite == true })},
+                {pokemonList.postValue(it)},
                 {pokemonList.postValue(null)})
     }
 }
