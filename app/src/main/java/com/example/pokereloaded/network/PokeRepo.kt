@@ -11,7 +11,7 @@ import rx.Observable
 interface PokeRepo {
 
     @GET("pokemon/")
-    fun getList(@Query("page") page: Int, @Query("limit") size: Int): PokemonList
+    suspend fun getList(@Query("pageNo") page: Int, @Query("pageSize") size: Int = 50): PokemonList
 
     @GET("pokemon/?pageNo=1&pageSize=1500")
     fun getList(): Observable<PokemonList>
