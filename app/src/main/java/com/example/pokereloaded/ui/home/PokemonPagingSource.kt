@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.pokereloaded.models.Pokemon
 import com.example.pokereloaded.network.PokeRepo
-import java.lang.Exception
 
 class PokemonPagingSource(val repo: PokeRepo): PagingSource<Int, Pokemon>() {
 
