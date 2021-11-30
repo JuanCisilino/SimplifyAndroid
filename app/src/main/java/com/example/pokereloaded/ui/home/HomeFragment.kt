@@ -15,6 +15,8 @@ import com.example.pokereloaded.R
 import com.example.pokereloaded.databinding.FragmentHomeBinding
 import com.example.pokereloaded.extentions.hideKeyboard
 import com.example.pokereloaded.models.Pokemon
+import com.example.pokereloaded.ui.adapters.PaginatedAdapter
+import com.example.pokereloaded.ui.adapters.PokemonAdapter
 import kotlinx.coroutines.flow.collectLatest
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -35,10 +37,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchList()
         initMembers()
         setupRecycler()
         setEditText()
         subscribeToLiveData()
+        fetchPaginatedList()
     }
 
     private fun subscribeToLiveData() {
@@ -46,7 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setEditText(){
-        this.view?.rootView?.let { this.hideKeyboard(it) }
+        this.view?.rootView?.let { hideKeyboard(it) }
         binding.searchEditText.setOnEditorActionListener { _, actionId, _ -> editorNameActionListener(actionId)  }
     }
 
@@ -63,7 +67,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun getList(pokemonList: List<Pokemon>?) {
        pokemonList
-           ?.let { /* Do Nothing */ }
+           ?.let {  }
            ?:run { Toast.makeText(context, getString(R.string.error_list), Toast.LENGTH_LONG).show() }
     }
 
@@ -72,8 +76,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         paginatedAdapter = PaginatedAdapter()
         paginatedAdapter.onPokemonClickCallback = { navigateToDetail(it) }
         adapter.onPokemonClickCallback = { navigateToDetail(it) }
-        viewModel.fetchList()
-        fetchPaginatedList()
     }
 
     private fun fetchPaginatedList() {

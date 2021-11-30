@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokereloaded.R
 import com.example.pokereloaded.databinding.FragmentFavoritesBinding
 import com.example.pokereloaded.models.Pokemon
-import com.example.pokereloaded.ui.home.PokemonAdapter
+import com.example.pokereloaded.ui.adapters.PokemonAdapter
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 

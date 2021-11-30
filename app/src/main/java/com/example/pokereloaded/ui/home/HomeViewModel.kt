@@ -10,6 +10,7 @@ import androidx.paging.cachedIn
 import com.example.pokereloaded.models.Pokemon
 import com.example.pokereloaded.network.PokeRepo
 import com.example.pokereloaded.network.RetroInstance
+import com.example.pokereloaded.ui.adapters.PokemonPagingSource
 import kotlinx.coroutines.flow.Flow
 import rx.schedulers.Schedulers
 
@@ -25,15 +26,15 @@ class HomeViewModel : ViewModel() {
             .observeOn(Schedulers.io())
             .subscribe(
                 {
-                    list = it.pokemonList as ArrayList<Pokemon>
-                    pokemonList.postValue(it.pokemonList)
+                    list = it as ArrayList<Pokemon>
+                    pokemonList.postValue(it)
                 },
                 {pokemonList.postValue(null)})
     }
 
     fun fetchPaginatedList(): Flow<PagingData<Pokemon>> {
-        return Pager(config = PagingConfig(pageSize = 50, maxSize = 100, prefetchDistance = 20),
-        pagingSourceFactory = {PokemonPagingSource(instance)}).flow.cachedIn(viewModelScope)
+        return Pager(config = PagingConfig(pageSize = 50, maxSize = 100, prefetchDistance = 25),
+        pagingSourceFactory = { PokemonPagingSource(instance) }).flow.cachedIn(viewModelScope)
     }
 
 }

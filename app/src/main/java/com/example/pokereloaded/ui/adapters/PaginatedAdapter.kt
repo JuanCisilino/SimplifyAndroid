@@ -1,4 +1,4 @@
-package com.example.pokereloaded.ui.home
+package com.example.pokereloaded.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View

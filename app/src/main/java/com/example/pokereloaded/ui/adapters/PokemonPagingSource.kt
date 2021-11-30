@@ -1,4 +1,4 @@
-package com.example.pokereloaded.ui.home
+package com.example.pokereloaded.ui.adapters
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

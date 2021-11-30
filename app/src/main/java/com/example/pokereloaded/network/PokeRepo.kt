@@ -2,10 +2,7 @@ package com.example.pokereloaded.network
 
 import com.example.pokereloaded.models.Pokemon
 import com.example.pokereloaded.models.PokemonList
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 import rx.Observable
 
 interface PokeRepo {
@@ -13,8 +10,8 @@ interface PokeRepo {
     @GET("pokemon/")
     suspend fun getList(@Query("pageNo") page: Int, @Query("pageSize") size: Int = 50): PokemonList
 
-    @GET("pokemon/?pageNo=1&pageSize=1500")
-    fun getList(): Observable<PokemonList>
+    @POST("pokemon/")
+    fun getList(): Observable<List<Pokemon>>
 
     @GET("pokemon/{name}")
     fun getPokemonById(@Path ("name") name: String): Observable<Pokemon>
