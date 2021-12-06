@@ -119,17 +119,21 @@ class DetailFragment : Fragment() {
     }
 
     private fun setComponents() {
-        binding.nameTextView.text = pokemon.name
-        if (!pokemon.nickName.isNullOrBlank()) setNickName()
-        binding.favoriteImageView.setImageResource(getFavorite())
-        binding.favoriteImageView.setOnClickListener { setFavorite() }
-        Glide.with(requireContext()).load(pokemon.detimg).into(binding.imagenImageView)
+        setBindingComponents()
         setBackgroundColor()
         pokemon.tipos?.forEach { setTypesLayout(it) }
         setStrongLayout()
         setWeakLayout()
         randomizeCaract()
         setEvolution()
+    }
+
+    private fun setBindingComponents(){
+        binding.nameTextView.text = pokemon.name
+        if (!pokemon.nickName.isNullOrBlank()) setNickName()
+        binding.favoriteImageView.setImageResource(getFavorite())
+        binding.favoriteImageView.setOnClickListener { setFavorite() }
+        Glide.with(requireContext()).load(pokemon.detimg).into(binding.imagenImageView)
     }
 
     private fun setNickName(){

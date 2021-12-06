@@ -29,4 +29,8 @@
     <string name="evoluciona_de">Evoluciona de</string>
     <string name="evoluciona_en">Evoluciona en</string>
     <string name="search_editText">Escribe el nombre del pokemon que buscas</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Listo</string>
+    <string name="nickname">Podes ponerme nombre</string>
+    <string name="nickname_title">Has capturado un pokemon!!</string>
 </resources>

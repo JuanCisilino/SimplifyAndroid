@@ -50,6 +50,7 @@ class PaginatedAdapter: PagingDataAdapter<Pokemon, PaginatedAdapter.PokeHolder>(
             pokemon.split()
             if (!pokemon.nickName.isNullOrBlank()) setNickName(pokemon) else nickName.text = ""
             name.text = pokemon.name
+            nickName.text = "(${pokemon.nickName})"
             pokemon.listimg?.let { glideImage(image, it) }
             favorite.visibility =
                 if (pokemon.favorite == true) View.VISIBLE else View.GONE

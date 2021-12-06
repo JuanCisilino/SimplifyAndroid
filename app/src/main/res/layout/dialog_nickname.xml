@@ -22,7 +22,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="Has capturado un pokemon!!"/>
+            android:text="@string/nickname_title"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:id="@+id/et3"
             android:imeOptions="actionDone"
             android:singleLine="true"
-            android:hint="Podes ponerme nombre"
+            android:hint="@string/nickname"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="10dp"
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Listo"
+                android:text="@string/ok"
                 android:textColor="@color/black" />
 
             <Button
@@ -57,10 +57,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Cancelar"
+                android:text="@string/cancel"
                 android:textSize="20sp"
                 android:textColor="@color/black" />
-
 
         </LinearLayout>
 
