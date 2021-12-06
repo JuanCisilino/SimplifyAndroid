@@ -17,19 +17,21 @@ import rx.schedulers.Schedulers
 class HomeViewModel : ViewModel() {
 
     var pokemonList = MutableLiveData<List<Pokemon>?>()
-    lateinit var list : ArrayList<Pokemon>
+    var list = ArrayList<Pokemon>()
     private val instance = RetroInstance.getRetrofitInstance().create(PokeRepo::class.java)
 
     fun fetchList() {
-        instance.getList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .subscribe(
-                {
-                    list = it as ArrayList<Pokemon>
-                    pokemonList.postValue(it)
-                },
-                {pokemonList.postValue(null)})
+        if (list.isEmpty()){
+            instance.getList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(
+                    {
+                        list = it as ArrayList<Pokemon>
+                        pokemonList.postValue(it)
+                    },
+                    {pokemonList.postValue(null)})
+        }
     }
 
     fun fetchPaginatedList(): Flow<PagingData<Pokemon>> {
