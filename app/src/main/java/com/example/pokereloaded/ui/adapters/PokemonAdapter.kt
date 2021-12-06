@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokereloaded.R
 import com.example.pokereloaded.models.Pokemon
+import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 import java.util.ArrayList
 
@@ -31,11 +32,17 @@ class PokemonAdapter: RecyclerView.Adapter<PokemonAdapter.MyViewHolder>() {
 
         fun bind(pokemon: Pokemon) {
             pokemon.split()
+            if (!pokemon.nickName.isNullOrBlank()) setNickName(pokemon) else view.pokemonNickNameTextView.text = ""
             view.pokemonNameTextView.text = pokemon.name
             pokemon.listimg?.let { glideImage(view.pokemonImageView, it) }
             view.pokemonfavoriteImageView.visibility =
                 if (pokemon.favorite == true) View.VISIBLE else View.GONE
             itemView.setOnClickListener { onPokemonClickCallback?.invoke(pokemon) }
+        }
+
+        private fun setNickName(pokemon: Pokemon){
+            view.pokemonNickNameTextView.visibility = View.VISIBLE
+            view.pokemonNickNameTextView.text = "(${pokemon.nickName})"
         }
 
         private fun glideImage(imageView: ImageView, url: String){

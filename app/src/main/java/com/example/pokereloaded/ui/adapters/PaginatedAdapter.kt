@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokereloaded.R
 import com.example.pokereloaded.models.Pokemon
+import kotlinx.android.synthetic.main.item_pokemon.view.*
 
 class PaginatedAdapter: PagingDataAdapter<Pokemon, PaginatedAdapter.PokeHolder>(DiffUtilCallback()) {
 
@@ -33,7 +34,7 @@ class PaginatedAdapter: PagingDataAdapter<Pokemon, PaginatedAdapter.PokeHolder>(
 
 
         override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon) : Boolean{
-            return oldItem == newItem
+            return oldItem.hashCode() == newItem.hashCode()
         }
 
     }
@@ -41,16 +42,23 @@ class PaginatedAdapter: PagingDataAdapter<Pokemon, PaginatedAdapter.PokeHolder>(
     inner class PokeHolder(view: View): RecyclerView.ViewHolder(view){
 
         private val name: TextView = view.findViewById(R.id.pokemonNameTextView)
+        private val nickName: TextView = view.findViewById(R.id.pokemonNickNameTextView)
         private val image: ImageView = view.findViewById(R.id.pokemonImageView)
         private val favorite: ImageView = view.findViewById(R.id.pokemonfavoriteImageView)
 
         fun bind(pokemon: Pokemon) {
             pokemon.split()
+            if (!pokemon.nickName.isNullOrBlank()) setNickName(pokemon) else nickName.text = ""
             name.text = pokemon.name
             pokemon.listimg?.let { glideImage(image, it) }
             favorite.visibility =
                 if (pokemon.favorite == true) View.VISIBLE else View.GONE
             itemView.setOnClickListener { onPokemonClickCallback?.invoke(pokemon) }
+        }
+
+        private fun setNickName(pokemon: Pokemon){
+            nickName.visibility = View.VISIBLE
+            nickName.text = "(${pokemon.nickName})"
         }
 
         private fun glideImage(imageView: ImageView, url: String){

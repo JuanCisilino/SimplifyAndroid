@@ -1,5 +1,6 @@
 package com.example.pokereloaded.network
 
+import com.example.pokereloaded.models.NickNameRequest
 import com.example.pokereloaded.models.Pokemon
 import com.example.pokereloaded.models.PokemonList
 import retrofit2.http.*
@@ -21,4 +22,7 @@ interface PokeRepo {
 
     @PATCH("pokemon/{name}")
     fun favorite(@Path ("name") name: String): Observable<Pokemon>
+
+    @PATCH("pokemon/")
+    fun setNickname(@Body nickNameRequest: NickNameRequest): Observable<Pokemon>
 }

@@ -44,4 +44,14 @@
         android:textAllCaps="true"
         android:textColor="@color/black"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pokemonNickNameTextView"
+        android:visibility="gone"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textColor="@color/black"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

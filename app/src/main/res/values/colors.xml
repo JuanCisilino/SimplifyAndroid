@@ -13,5 +13,6 @@
     <color name="rest">#D7E87070</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#63707070</color>
     <color name="lightBackground">#B4BCDFF8</color>
 </resources>

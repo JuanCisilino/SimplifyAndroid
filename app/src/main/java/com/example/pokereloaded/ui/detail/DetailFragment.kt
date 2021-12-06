@@ -1,12 +1,17 @@
 package com.example.pokereloaded.ui.detail
 
+import android.app.Dialog
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.pokereloaded.R
 import com.example.pokereloaded.databinding.FragmentDetailBinding
+import com.example.pokereloaded.extentions.hideKeyboard
 import com.example.pokereloaded.models.Pokemon
 import kotlinx.android.synthetic.main.item_caracteristic.view.*
 import kotlinx.android.synthetic.main.item_pokemon.view.*
@@ -24,6 +30,7 @@ class DetailFragment : Fragment() {
     private lateinit var viewModel: DetailViewModel
     private lateinit var pokemon: Pokemon
     private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var dialog : Dialog
     private var _binding: FragmentDetailBinding? = null
 
     private val binding get() = _binding!!
@@ -44,6 +51,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mediaPlayer = MediaPlayer.create(context, R.raw.favorite)
+        dialog = Dialog(requireActivity())
         setComponents()
         subscribeToLiveData()
     }
@@ -112,6 +120,7 @@ class DetailFragment : Fragment() {
 
     private fun setComponents() {
         binding.nameTextView.text = pokemon.name
+        if (!pokemon.nickName.isNullOrBlank()) setNickName()
         binding.favoriteImageView.setImageResource(getFavorite())
         binding.favoriteImageView.setOnClickListener { setFavorite() }
         Glide.with(requireContext()).load(pokemon.detimg).into(binding.imagenImageView)
@@ -123,8 +132,49 @@ class DetailFragment : Fragment() {
         setEvolution()
     }
 
+    private fun setNickName(){
+        binding.nickNameTextView.visibility = View.VISIBLE
+        binding.nickNameTextView.text = "(${pokemon.nickName})"
+    }
+
     private fun setFavorite(){
-        if (pokemon.favorite == false) mediaPlayer.start()
+        if (pokemon.favorite == false) setNickNameDialog()
+        else setFavoriteFalse()
+    }
+
+    private fun setFavoriteFalse() {
+        pokemon.name?.let { viewModel.setNickName(it, "") }
+        viewModel.favorite(pokemon.name)
+    }
+
+    private fun setNickNameDialog() {
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_nickname)
+        setButtons(dialog.findViewById(R.id.btnok) as Button, dialog.findViewById(R.id.btncn) as Button,
+            dialog.findViewById(R.id.et3) as EditText)
+        dialog.show()
+    }
+
+    private fun editorNameActionListener(actionId: Int, nickname: Editable): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            setPossitve(nickname)
+            dialog.dismiss()
+            return true
+        }
+        return false
+    }
+
+    private fun setButtons(btnok: Button, btncn: Button, et3: EditText) {
+        et3.setOnEditorActionListener { _, actionId, _ -> editorNameActionListener(actionId, et3.text)  }
+        btnok.setOnClickListener {
+            setPossitve(et3.text)
+            dialog.dismiss() }
+        btncn.setOnClickListener { dialog.dismiss() }
+    }
+
+    private fun setPossitve(et3: Editable) {
+        pokemon.name?.let { viewModel.setNickName(it, et3.toString()) }
+        mediaPlayer.start()
         viewModel.favorite(pokemon.name)
     }
 
